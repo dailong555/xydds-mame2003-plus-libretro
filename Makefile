@@ -528,6 +528,19 @@ else ifeq ($(platform), miyoo)
 	PLATCFLAGS += -fomit-frame-pointer -march=armv5te -mtune=arm926ej-s -ffast-math
 	CXXFLAGS += -fno-rtti -fno-exceptions
 
+# XYDDS
+else ifeq ($(platform), xydds)
+	TARGET := $(TARGET_NAME)_libretro.so
+	CC = /opt/xydds/usr/bin/arm-linux-gcc
+	CXX = /opt/xydds/usr/bin/arm-linux-g++
+	AR = /opt/xydds/usr/bin/arm-linux-ar
+	fpic := -fPIC
+	LDFLAGS += -shared -Wl,--version-script=link.T -Wl,-no-undefined
+	PLATCFLAGS := -DNO_UNALIGNED_ACCESS
+	PLATCFLAGS += -fomit-frame-pointer -marm -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math
+	PLATCFLAGS += -DARM -mcpu=cortex-a7
+	CXXFLAGS += -fno-rtti -fno-exceptions
+
 # Emscripten
 else ifeq ($(platform), emscripten)
 	TARGET := $(TARGET_NAME)_libretro_$(platform).bc
