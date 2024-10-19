@@ -538,7 +538,7 @@ else ifeq ($(platform), xydds)
 	LDFLAGS += -shared -Wl,--version-script=link.T -Wl,-no-undefined
 	PLATCFLAGS := -DNO_UNALIGNED_ACCESS
 	PLATCFLAGS += -fomit-frame-pointer -marm -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math
-	PLATCFLAGS += -DARM -mcpu=cortex-a7
+	PLATCFLAGS += -mcpu=cortex-a7
 	CXXFLAGS += -fno-rtti -fno-exceptions
 
 # Emscripten
